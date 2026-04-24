@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Slots</title>
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+        }
+        .free {
+            color: green;
+        }
+        .occupied {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <h2 id="title"></h2>
+    <div id="slots"></div>
+
+    <script>
+        let data = {
+            right: ["Occupied", "Free", "Free", "Occupied", "Free"],
+            left: ["Free", "Occupied", "Occupied", "Free", "Free"],
+            straight: ["Free", "Free", "Occupied", "Free", "Occupied"]
+        };
+
+        let dir = localStorage.getItem("dir");
+        document.getElementById("title").innerText = dir.toUpperCase() + " SIDE";
+
+        let output = "";
+
+        for(let i = 0; i < data[dir].length; i++) {
+            let status = data[dir][i];
+            let className = status === "Free" ? "free" : "occupied";
+
+            output += `<p class="${className}">
+                        Slot ${dir[0].toUpperCase()}${i+1} - ${status}
+                      </p>`;
+        }
+
+        document.getElementById("slots").innerHTML = output;
+    </script>
+
+</body>
+</html>
