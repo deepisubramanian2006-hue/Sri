@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Parking Dashboard</title>
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+        }
+        .box {
+            border: 1px solid black;
+            padding: 20px;
+            margin: 20px;
+            display: inline-block;
+            width: 200px;
+        }
+        button {
+            padding: 8px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Parking Dashboard</h2>
+
+    <div class="box">
+        <h3>Right</h3>
+        <p id="rightCount"></p>
+        <button onclick="view('right')">View</button>
+    </div>
+
+    <div class="box">
+        <h3>Left</h3>
+        <p id="leftCount"></p>
+        <button onclick="view('left')">View</button>
+    </div>
+
+    <div class="box">
+        <h3>Straight</h3>
+        <p id="straightCount"></p>
+        <button onclick="view('straight')">View</button>
+    </div>
+
+    <script>
+        let right = ["Occupied", "Free", "Free", "Occupied", "Free"];
+        let left = ["Free", "Occupied", "Occupied", "Free", "Free"];
+        let straight = ["Free", "Free", "Occupied", "Free", "Occupied"];
+
+        function countFree(arr) {
+            let count = 0;
+            for(let i = 0; i < arr.length; i++) {
+                if(arr[i] === "Free") count++;
+            }
+            return count;
+        }
+
+        document.getElementById("rightCount").innerText = countFree(right) + " slots free";
+        document.getElementById("leftCount").innerText = countFree(left) + " slots free";
+        document.getElementById("straightCount").innerText = countFree(straight) + " slots free";
+
+        function view(direction) {
+            localStorage.setItem("dir", direction);
+            window.location.href = "slots.html";
+        }
+    </script>
+
+</body>
+</html>
